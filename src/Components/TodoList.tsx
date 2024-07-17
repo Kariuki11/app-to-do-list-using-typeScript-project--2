@@ -25,8 +25,9 @@ const TodoList = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (todo !== "") {
-      setTodos((prev) => [...prev, todo]);
+    const item = todo.trim()
+    if (item !== "") {
+      setTodos((prev) => [...prev, item]);
     }
     setTodo("");
   };
