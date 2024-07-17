@@ -33,7 +33,7 @@ setCompleted((prev) => [...prev, index])
       </form>
       <ul>
         {todos.map((item, index) => (
-          <li className="{`${completed}`}" key={index}>
+          <li className="{`${completed.includes(index) ? 'task-completed' : ''}`}" key={index}>
             {item}
             <input onClick={() => handleComplete(index)} type="checkbox" />
           </li>
