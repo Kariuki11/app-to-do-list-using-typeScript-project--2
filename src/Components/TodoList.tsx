@@ -1,33 +1,38 @@
 import { useState } from "react";
 
-
 const TodoList = () => {
-const [todo, setTodo] = useState("");
-const [todos, setTodos] = useState([
-    'clean Utensils',
-    'clean the house',
-    'clean the car',
-])
+  const [todo, setTodo] = useState("");
+  const [todos, setTodos] = useState([
+    "clean Utensils",
+    "clean the house",
+    "clean the car",
+  ]);
 
-const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setTodos((prev) => [...prev, todo])
-    setTodo('')
-}
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (todo !== "") {
+      setTodos((prev) => [...prev, todo]);
+    }
+    setTodo("");
+  };
 
   return (
     <>
-    <form onSubmit={(e) => handleSubmit(e)}>
-        <input placeholder="Add item" value={todo} onChange={(e) => setTodo(e.target.value.trim)}/>
+      <form onSubmit={(e) => handleSubmit(e)}>
+        <input
+          placeholder="Add item"
+          value={todo}
+          onChange={(e) => setTodo(e.target.value.trim)}
+        />
         <button type="submit">Add Item</button>
-    </form>
-    <ul>
+      </form>
+      <ul>
         {todos.map((item, index) => (
-            <li key={index}>{item}</li>
+          <li key={index}>{item}</li>
         ))}
-    </ul>
+      </ul>
     </>
   );
-}
+};
 
 export default TodoList;
