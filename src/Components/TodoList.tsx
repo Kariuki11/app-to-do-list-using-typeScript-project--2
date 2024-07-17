@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { MdDeleteOutline } from "react-icons/md";
 
 const TodoList = () => {
   const [todo, setTodo] = useState("");
@@ -10,7 +11,15 @@ const TodoList = () => {
   ]);
 
   const handleComplete = (index: number) => {
-setCompleted((prev) => [...prev, index])
+    if(completed.includes(index)){
+        setCompleted((prev) => prev.filter((item) => item !== index))
+    } else {
+        setCompleted((prev) => [...prev, index])
+    }
+  }
+
+  const handleDelete = (index: number) => {
+    setTodos((prev) => prev.filter((item, i) => i !== index));
   }
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -33,9 +42,12 @@ setCompleted((prev) => [...prev, index])
       </form>
       <ul>
         {todos.map((item, index) => (
-          <li className="{`${completed.includes(index) ? 'task-completed' : ''}`}" key={index}>
+          <li className="{`${completed.includes(index) ? 'task-completed' : ''}`}" 
+          key={index}
+          >
             {item}
             <input onClick={() => handleComplete(index)} type="checkbox" />
+            <button onClick={() => handleDelete(index)}><MdDeleteOutline /></button>
           </li>
         ))}
       </ul>
