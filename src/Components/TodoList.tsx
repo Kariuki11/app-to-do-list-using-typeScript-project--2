@@ -2,11 +2,16 @@ import { useState } from "react";
 
 const TodoList = () => {
   const [todo, setTodo] = useState("");
+  const [completed, setCompleted] = useState<number[]>([])
   const [todos, setTodos] = useState([
     "clean Utensils",
     "clean the house",
     "clean the car",
   ]);
+
+  const handleComplete = (index: number) => {
+setCompleted((prev) => [...prev, index])
+  }
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -22,13 +27,16 @@ const TodoList = () => {
         <input
           placeholder="Add item"
           value={todo}
-          onChange={(e) => setTodo(e.target.value.trim)}
+          onChange={(e) => setTodo(e.target.value)}
         />
         <button type="submit">Add Item</button>
       </form>
       <ul>
         {todos.map((item, index) => (
-          <li key={index}>{item}</li>
+          <li className="{`${completed}`}" key={index}>
+            {item}
+            <input onClick={() => handleComplete(index)} type="checkbox" />
+          </li>
         ))}
       </ul>
     </>
