@@ -9,14 +9,16 @@ const [todos, setTodos] = useState([
     'clean the car',
 ])
 
-const handleSubmit = () => {
+const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
     setTodos((prev) => [...prev, todo])
+    setTodo('')
 }
 
   return (
     <>
-    <form onSubmit={handleSubmit}>
-        <input placeholder="Add item" value={todo} onChange={(e) => setTodo(e.target.value)}/>
+    <form onSubmit={(e) => handleSubmit(e)}>
+        <input placeholder="Add item" value={todo} onChange={(e) => setTodo(e.target.value.trim)}/>
         <button type="submit">Add Item</button>
     </form>
     <ul>
