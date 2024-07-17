@@ -19,7 +19,8 @@ const TodoList = () => {
   }
 
   const handleDelete = (index: number) => {
-    setTodos((prev) => prev.filter((item, i) => i !== index));
+    setTodos((prev) => prev.filter((_item, i) => i !== index));
+    setCompleted((prev) => prev.filter((item) => item !== index)); 
   }
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -46,11 +47,21 @@ const TodoList = () => {
           key={index}
           >
             {item}
-            <input onClick={() => handleComplete(index)} type="checkbox" />
-            <button onClick={() => handleDelete(index)}><MdDeleteOutline /></button>
+            <input 
+            checked={completed.includes(index)} 
+            onClick={() => handleComplete(index)} 
+            type="checkbox" 
+            />
+            <button onClick={() => handleDelete(index)}><MdDeleteOutline />
+            </button>
           </li>
         ))}
       </ul>
+
+
+
+    <p>Total Task: {todos.length}</p>
+    <p>Completed Task: {completed.length}</p>
     </>
   );
 };
