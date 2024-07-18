@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { MdDeleteOutline } from "react-icons/md";
+import { FaPlus } from "react-icons/fa6"
 
 const TodoList = () => {
   const [todo, setTodo] = useState("");
@@ -40,7 +41,9 @@ const TodoList = () => {
           value={todo}
           onChange={(e) => setTodo(e.target.value)}
         />
-        <button type="submit">Add Item</button>
+        <button className="add-button">
+          <FaPlus />
+        </button>
       </form>
       <ul>
         {todos.map((item, index) => (
